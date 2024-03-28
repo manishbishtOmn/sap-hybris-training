@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<atomictypes>
+		<atomictype class="concerttours.ConcerttoursConstants" extends="java.lang.Object" autocreate="true" generate="true" />
+	</atomictypes>
+
+	<collectiontypes>
+		<collectiontype code="stringList" elementtype="java.lang.String" type="list" autocreate="true" generate="true"/>
+	</collectiontypes>
+
+	<enumtypes>
+		<enumtype code="ConcertType" autocreate="true" generate="true" dynamic="false">
+			<value code="openair" />
+			<value code="indoor" />
+		</enumtype>
+
+		<enumtype code="MusicType" autocreate="true" generate="true" dynamic="true">
+		</enumtype>
+	</enumtypes>
+
+
+	<relations>
+		<relation code="Product2RockBand" autocreate="true" generate="false" localized="false">
+			<sourceElement qualifier="tours" type="Product" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="band" type="Band" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="Student2Subject" localized="false" autocreate="true" generate="false">
+			<sourceElement type="Student" qualifier="students" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+
+			<targetElement type="Subject" qualifier="subject" cardinality="many" ordered="false" collectiontype="set">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+
+		</relation>
+
+		<relation code="Band2MusicType" autocreate="true" generate="false" localized="false">
+			<deployment table="Band2MusicType" typecode="30269" />
+			<sourceElement qualifier="bands" type="Band" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="types" type="MusicType" cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+
+	<itemtypes>
+
+		<itemtype generate="true" code="Product" autocreate="false">
+			<attributes>
+				<attribute qualifier="hashtag" type="localized:java.lang.String">
+					<description>hashtag of concert tour for social media</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="Band" autocreate="true">
+			<deployment table="Bands" typecode="30268" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>short unique code of band</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>name of band</description>
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="history" type="localized:java.lang.String">
+					<description>history of band</description>
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="albumSales" type="java.lang.Long">
+					<description>official global album sales</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype generate="true" code="Concert" extends="VariantProduct" autocreate="true">
+			<attributes>
+				<attribute qualifier="venue" type="java.lang.String">
+					<description>venue of concert</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="date" type="java.util.Date" >
+					<description>date of concert</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="concertType" type="ConcertType">
+					<description>type of concert (indoors or open air)</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Author" generate="true" autocreate="true">
+			<deployment table="Authors" typecode="10103" />
+			<attributes>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>author name</description>
+					<persistence type="property" />
+				</attribute>
+				
+				<attribute qualifier="id" type="java.lang.Long" >
+					<description>Author id</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="books" type="stringList">
+					<description>Author written books</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Student" generate="true" autocreate="true">
+			<deployment table="Students" typecode="30302"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.Long">
+					<description>Student unique id</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="true" removable="true" optional="false" unique="true" initial="true"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<description>Student name</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="rollNumber" type="java.lang.Long">
+					<description>Roll Number</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="address" type="java.lang.String">
+					<description>Student Address</description>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+
+		</itemtype>
+
+		<itemtype code="Subject" generate="true" autocreate="true">
+			<deployment table="Subjects" typecode="30303"/>
+			<attributes>
+
+				<attribute qualifier="id" type="java.lang.Long">
+					<description> Subject unique id</description>
+					<persistence type="property"/>
+					<modifiers read="true" write="true" search="true" removable="true" optional="false" unique="true" initial="true"/>
+				</attribute>
+
+				<attribute qualifier="name" type="java.lang.String">
+					<description>Subject name</description>
+					<persistence type="property"/>
+				</attribute>
+
+				<attribute qualifier="marks" type="java.lang.Long">
+					<description>Subject Marks</description>
+					<persistence type="property"/>
+					<defaultvalue>Integer.valueOf(33)</defaultvalue>
+				</attribute>
+
+				<attribute qualifier="grade" type="java.lang.String">
+					<description>Subject grade</description>
+					<persistence type="property"/>
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+
+		<itemtype generate="true" code="News" autocreate="true">
+			<deployment table="News" typecode="30270" />
+			<attributes>
+				<attribute qualifier="date" type="java.util.Date">
+					<description>date of news item</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="headline" type="java.lang.String">
+					<description>short headline for the news item</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="content" type="java.lang.String">
+					<description>fuller description of the news item</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="UserAuditEntry" generate="true" autocreate="true">
+			<deployment table="UserAuditEntries" typecode="12128"/>
+			<attributes>
+				<attribute qualifier="uid" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="displayName" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="changeTimestamp" type="java.util.Date">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+<!--
+		<itemtype generate="true"
+		   code="MyProduct"
+		   jaloclass="concerttours.jalo.MyProduct"
+		   extends="Product"
+		   autocreate="true"
+	   >
+			<attributes>
+				<attribute qualifier="myExampleInitialStringField" type="java.lang.String">
+					<description>My Example Initial String Value</description>
+					<modifiers initial="true"/>
+					<persistence type="property"/>
+				</attribute>
+
+				<attribute qualifier="myExampleBooleanField" type="java.lang.Boolean">
+					<description>Example Initial Boolean Field</description>
+               <persistence type="property"/>
+				</attribute>
+
+				<attribute qualifier="media" type="Media">
+					<persistence type="property"/>
+				</attribute>
+
+			</attributes>
+		</itemtype>
+-->
+	</itemtypes>
+
+
+</items>

@@ -1,0 +1,11 @@
+#Ant properties
+#Mon May 11 11:23:48 UTC 2020
+version.api=2005
+vendor=hybris
+group.id=de.hybris.platform
+name=concerttours
+description=concerttours
+builddate=20200511 1122
+releasedate=20200511 1122
+version=2005.0
+module.name=platform-module
