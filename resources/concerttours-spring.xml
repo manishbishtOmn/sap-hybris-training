@@ -147,4 +147,6 @@
         <property name="newsService" ref="newsService" />
         <property name="configurationService" ref="configurationService" />
     </bean>
+
+    <bean id="concertDaysUntilAttributeHandler" class="concerttours.attributehandlers.ConcertDaysUntilAttributeHandler"/>
 </beans>

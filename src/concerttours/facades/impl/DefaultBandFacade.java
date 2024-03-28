@@ -33,6 +33,7 @@ public class DefaultBandFacade implements BandFacade
     public List<BandData> getBands()
     {
         final List<BandModel> bandModels = bandService.getBands();
+        System.out.println("data from DB"+bandModels);
         final List<BandData> bandFacadeData = convertor.convert(bandModels);
         return bandFacadeData;
     }
