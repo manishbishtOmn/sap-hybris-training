@@ -110,6 +110,10 @@
 					<description>type of concert (indoors or open air)</description>
 					<persistence type="property" />
 				</attribute>
+				<attribute qualifier="daysUntil" type="java.lang.Long">
+					<persistence type="dynamic" attributeHandler="concertDaysUntilAttributeHandler" />
+					<modifiers read="true" write="false" />
+				</attribute>
 			</attributes>
 		</itemtype>
 		

@@ -139,4 +139,12 @@
         <property name="interceptor" ref="auditingUserRemoveInterceptor"/>
         <property name="typeCode" value="UserAuditEntry"/>
     </bean>
+
+    <bean id="newsService" class="concerttours.service.impl.DefaultNewsService">
+        <property name="newsDAO" ref="newsDAO" />
+    </bean>
+    <bean id="sendNewsJob" class="concerttours.jobs.SendNewsJob" parent="abstractJobPerformable">
+        <property name="newsService" ref="newsService" />
+        <property name="configurationService" ref="configurationService" />
+    </bean>
 </beans>
