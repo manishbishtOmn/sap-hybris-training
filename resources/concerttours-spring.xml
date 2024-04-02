@@ -140,12 +140,17 @@
         <property name="typeCode" value="UserAuditEntry"/>
     </bean>
 
-    <bean id="newsService" class="concerttours.service.impl.DefaultNewsService">
+    <alias name="defaultNewsService" alias="newsService" />
+    <bean id="defaultNewsService" class="concerttours.service.impl.DefaultNewsService">
         <property name="newsDAO" ref="newsDAO" />
     </bean>
     <bean id="sendNewsJob" class="concerttours.jobs.SendNewsJob" parent="abstractJobPerformable">
         <property name="newsService" ref="newsService" />
         <property name="configurationService" ref="configurationService" />
+    </bean>
+
+    <bean id="helloWorldJob" class="concerttours.jobs.HelloWorldJob" parent="abstractJobPerformable">
+
     </bean>
 
     <bean id="concertDaysUntilAttributeHandler" class="concerttours.attributehandlers.ConcertDaysUntilAttributeHandler"/>

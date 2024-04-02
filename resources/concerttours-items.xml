@@ -225,7 +225,9 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+		<itemtype code="HelloWorldCroJob" extends="CronJob" autocreate="true" generate="true">
 
+		</itemtype>
 <!--
 		<itemtype generate="true"
 		   code="MyProduct"

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 28 Mar 2024, 12:22:35                       ---
+ * --- Generated at 2 Apr 2024, 15:18:31                        ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
@@ -10,6 +10,7 @@ import concerttours.constants.ConcerttoursConstants;
 import concerttours.jalo.Author;
 import concerttours.jalo.Band;
 import concerttours.jalo.Concert;
+import concerttours.jalo.HelloWorldCroJob;
 import concerttours.jalo.News;
 import concerttours.jalo.Student;
 import concerttours.jalo.Subject;
@@ -310,6 +311,32 @@ public class ConcerttoursManager extends Extension
 	public Concert createConcert(final Map attributeValues)
 	{
 		return createConcert( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public HelloWorldCroJob createHelloWorldCroJob(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType("HelloWorldCroJob");
+			return (HelloWorldCroJob)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating HelloWorldCroJob : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public HelloWorldCroJob createHelloWorldCroJob(final Map attributeValues)
+	{
+		return createHelloWorldCroJob( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public News createNews(final SessionContext ctx, final Map attributeValues)
