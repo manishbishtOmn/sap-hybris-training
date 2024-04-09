@@ -22,7 +22,7 @@ public class BandController
     public String showBands(final Model model)
     {
         final List<BandData> bands = bandFacade.getBands();
-        model.addAttribute("bands", bands);
+        model.addAttribute("band", bands);
         return "BandList";
     }
     @RequestMapping(value = "/bands/{bandId}")

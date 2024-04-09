@@ -9,21 +9,18 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class BandDataPopulator implements Populator<List<BandModel>,List<BandData>> {
+public class BandDataPopulator implements Populator<BandModel,BandData> {
     @Override
-    public void populate(List<BandModel> source, List<BandData> target) throws ConversionException {
-//        final List<BandData> bandFacadeData = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(source)){
-            for (final BandModel sm : source) // populater
-            {
-                final BandData sfd = new BandData();
-                sfd.setId(sm.getCode());
-                sfd.setName(sm.getName());
-                sfd.setDescription(sm.getHistory());
-                sfd.setAlbumsSold(sm.getAlbumSales());
-                target.add(sfd);
-            }
+    public void populate(BandModel source, BandData target) throws ConversionException {
+//      final List<BandData> bandFacadeData = new ArrayList<>();
+        if(Objects.nonNull(source)){
+            final BandData sfd = new BandData();
+            sfd.setId(source.getCode());
+            sfd.setName(source.getName());
+            sfd.setDescription(source.getHistory());
+            sfd.setAlbumsSold(source.getAlbumSales());
         }
     }
 }
