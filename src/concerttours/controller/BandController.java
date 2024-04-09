@@ -21,8 +21,8 @@ public class BandController
     @RequestMapping(value = "/bands")
     public String showBands(final Model model)
     {
-        final List<BandData> bands = bandFacade.getBands();
-        model.addAttribute("band", bands);
+        final List<BandData> bands = bandFacade.getBandsMedia();
+        model.addAttribute("bands", bands);
         return "BandList";
     }
     @RequestMapping(value = "/bands/{bandId}")
